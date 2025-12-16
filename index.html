@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Полиция 2055</title>
+  <style>
+    :root {
+      --neon-purple: #a855f7;
+      --neon-pink: #ec4899;
+      --bg-dark: #05010d;
+      --glass: rgba(20, 10, 40, 0.55);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", Arial, sans-serif;
+    }
+
+    body {
+      background: var(--bg-dark);
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    .hero {
+      height: 100vh;
+      background: linear-gradient(rgba(5,1,13,0.6), rgba(5,1,13,0.9)),
+        url('https://images.unsplash.com/photo-1549640376-1239b7f4b7a4');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      letter-spacing: 4px;
+      color: var(--neon-purple);
+      text-shadow: 0 0 10px var(--neon-purple), 0 0 30px var(--neon-pink);
+    }
+
+    .hero h2 {
+      margin-top: 20px;
+      font-size: 1.5rem;
+      letter-spacing: 3px;
+      color: #38bdf8;
+      text-shadow: 0 0 10px #38bdf8, 0 0 25px #0ea5e9;
+      opacity: 0.9;
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 30px;
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+
+    .section {
+      min-height: 100vh;
+      padding: 80px 10%;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      align-items: start;
+    }
+
+    .card img {
+      width: 100%;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      box-shadow: 0 0 20px rgba(168,85,247,0.4);
+    }
+
+    .card img.active {
+      transform: scale(1.5);
+      box-shadow: 0 0 60px var(--neon-pink);
+      z-index: 2;
+    }
+
+    .card-text {
+      background: var(--glass);
+      backdrop-filter: blur(12px);
+      padding: 20px;
+      border-radius: 16px;
+      border: 1px solid rgba(168,85,247,0.4);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.4s ease;
+    }
+
+    .card-text.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .card-text h2 {
+      color: var(--neon-purple);
+      margin-bottom: 10px;
+      text-shadow: 0 0 10px var(--neon-purple);
+    }
+
+    .card-text p {
+      line-height: 1.6;
+      opacity: 0.9;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px;
+      opacity: 0.5;
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 900px) {
+      .section {
+        grid-template-columns: 1fr;
+      }
+
+      .card img.active {
+        transform: scale(1.2);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="hero">
+    <div class="hero-title">
+      <h1>ПОЛИЦИЯ 2055</h1>
+      <h2>ФОРМУЛА БЕЗОПАСНОСТИ</h2>
+    </div>
+    <div class="scroll-hint">Прокрутите вниз</div>
+  </section>
+
+  <section class="section">
+    <div class="card">
+      <img src="https://i.postimg.cc/zDSjj2tH/SAMOKAT.gif" />
+      <div class="card-text">
+        <h2>Умный патруль</h2>
+        <p>Патрульные подразделения 2055 года используют автономные системы наблюдения, предиктивную аналитику и беспилотные средства контроля городской среды.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://i.postimg.cc/h4brrZy7/PLANS.gif" />
+      <div class="card-text">
+        <h2>Цифровая идентификация</h2>
+        <p>Мгновенная идентификация личности, анализ поведенческих паттернов и работа с распределёнными государственными базами данных в реальном времени.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://i.postimg.cc/h4brrZyS/OC.gif" />
+      <div class="card-text">
+        <h2>Город под контролем</h2>
+        <p>Москва будущего — это умный мегаполис, где безопасность обеспечивается не количеством сотрудников, а скоростью обработки информации.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://i.postimg.cc/FFgZZCWd/EKZ.gif" />
+      <div class="card-text">
+        <h2>Экзоскелет полиции</h2>
+        <p>Современные экзоскелеты позволяют патрульным перемещать тяжести и быстрее реагировать на ЧС.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://i.postimg.cc/2jQqMVZF/LEDAR.gif" />
+      <div class="card-text">
+        <h2>Система наблюдения</h2>
+        <p>AI-камеры анализируют движение и отслеживают потенциально опасные зоны города в реальном времени.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://i.postimg.cc/vT77PhWf/drony.jpg" />
+      <div class="card-text">
+        <h2>Дроны патрулирования</h2>
+        <p>Беспилотные дроны патрулируют улицы, обеспечивая безопасность без непосредственного присутствия людей.</p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="https://i.postimg.cc/2jQqMVZF/LEDAR.gif" />
+      <div class="card-text">
+        <h2>Система наблюдения</h2>
+        <p>AI-камеры анализируют движение и отслеживают потенциально опасные зоны города в реальном времени.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2055 | Концепт-проект
+  </footer>
+
+  <script>
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(card => {
+      const img = card.querySelector('img');
+      const text = card.querySelector('.card-text');
+      img.addEventListener('click', () => {
+        document.querySelectorAll('img').forEach(i => i.classList.remove('active'));
+        document.querySelectorAll('.card-text').forEach(t => t.classList.remove('active'));
+        img.classList.add('active');
+        text.classList.add('active');
+      });
+    });
+  </script>
+
+</body>
+</html>
