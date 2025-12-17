@@ -33,50 +33,45 @@
       height: 100%;
       background: linear-gradient(rgba(5,1,13,0.8), rgba(5,1,13,0.9)), url('https://i.postimg.cc/KFV7kHFk/IMG-5799-(3).png');
       background-size: cover;
-background-position: center;
-display: flex;
-align-items: center;
-justify-content: center;
-flex-direction: column;
-z-index: 9999;
-cursor: pointer;
-transition: opacity 1s ease;
-text-align: center;
-padding: 0 20px;
-}
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      z-index: 9999;
+      cursor: pointer;
+      transition: opacity 1s ease;
+      text-align: center;
+      padding: 0 20px;
+    }
 
-
-      #welcome-screen h1 {
+    #welcome-screen h1 {
       font-size: 3rem;
       letter-spacing: 3px;
       color: var(--neon-purple);
       text-shadow: 0 0 15px var(--neon-purple), 0 0 40px var(--neon-pink);
       animation: pulse 1.5s infinite alternate;
       word-break: break-word;
-      }
+    }
 
-
-      #welcome-screen p {
+    #welcome-screen p {
       margin-top: 20px;
       font-size: 1.5rem;
       color: #38bdf8;
       text-shadow: 0 0 10px #38bdf8, 0 0 25px #0ea5e9;
       opacity: 0.9;
       word-break: break-word;
-      }
+    }
 
-
-      #welcome-screen.fade-out {
+    #welcome-screen.fade-out {
       opacity: 0;
       pointer-events: none;
-      }
+    }
 
-
-      @keyframes pulse {
+    @keyframes pulse {
       0% { text-shadow: 0 0 15px var(--neon-purple), 0 0 40px var(--neon-pink); }
       100% { text-shadow: 0 0 30px var(--neon-purple), 0 0 60px var(--neon-pink); }
-      }
-
+    }
 
     .hero {
       height: 100vh;
@@ -114,6 +109,7 @@ padding: 0 20px;
       opacity: 0.7;
     }
 
+    /* СЕКЦИЯ С КАРТОЧКАМИ - ПК ВЕРСИЯ (остается как было) */
     .section {
       min-height: 100vh;
       padding: 80px 10%;
@@ -146,6 +142,7 @@ padding: 0 20px;
       opacity: 0;
       transform: translateY(20px);
       transition: all 0.4s ease;
+      margin-top: 15px;
     }
 
     .card-text.active {
@@ -164,6 +161,76 @@ padding: 0 20px;
       opacity: 0.9;
     }
 
+    /* МОДАЛЬНОЕ ОКНО ДЛЯ МОБИЛЬНЫХ */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(5,1,13,0.95);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      max-width: 800px;
+      width: 100%;
+      background: var(--glass);
+      border-radius: 16px;
+      border: 1px solid rgba(168,85,247,0.4);
+      overflow: hidden;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-image {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+    }
+
+    .modal-body {
+      padding: 30px;
+    }
+
+    .modal-body h2 {
+      color: var(--neon-purple);
+      margin-bottom: 20px;
+      font-size: 2rem;
+    }
+
+    .modal-body p {
+      line-height: 1.8;
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: var(--neon-purple);
+      color: white;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1001;
+    }
+
     footer {
       text-align: center;
       padding: 40px;
@@ -171,44 +238,141 @@ padding: 0 20px;
       font-size: 0.8rem;
     }
 
-    @media (max-width: 900px) {
+    /* ТОЛЬКО МОБИЛЬНЫЕ СТИЛИ */
+    @media (max-width: 768px) {
+      /* Welcome screen */
+      #welcome-screen h1 {
+        font-size: 2.5rem;
+      }
+      
+      #welcome-screen p {
+        font-size: 1.3rem;
+      }
+      
+      /* Hero section */
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      
+      .hero h2 {
+        font-size: 1.2rem;
+      }
+      
+      /* СЕКЦИЯ С КАРТОЧКАМИ - ТОЛЬКО ДЛЯ МОБИЛЬНЫХ */
+      /* Отключаем грид и делаем по одной карточке */
       .section {
+        grid-template-columns: 1fr !important;
+        padding: 40px 20px !important;
+        gap: 30px !important;
+        display: flex !important;
+        flex-direction: column !important;
+      }
+      
+      .card {
+        width: 100% !important;
+        margin-bottom: 10px !important;
+      }
+      
+      /* Отключаем увеличение картинки на месте */
+      .card img.active {
+        transform: none !important;
+        box-shadow: 0 0 20px rgba(168,85,247,0.4) !important;
+        z-index: auto !important;
+      }
+      
+      /* Всегда показываем текст карточки на мобильных */
+      .card-text {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+        display: block !important;
+      }
+      
+      /* Модальное окно для мобильных */
+      .modal-content {
+        max-height: 85vh;
+        margin: 10px;
+      }
+      
+      .modal-image {
+        height: 300px;
+      }
+      
+      .modal-body {
+        padding: 20px;
+      }
+      
+      .modal-body h2 {
+        font-size: 1.8rem;
+      }
+      
+      .modal-body p {
+        font-size: 1rem;
+      }
+      
+      footer {
+        padding: 30px 20px;
+        font-size: 0.8rem;
+      }
+      
+      /* Убираем увеличение картинки на мобильных */
+      .card img {
+        cursor: pointer;
+      }
+      
+      /* Добавляем индикатор клика */
+      .card img::after {
+        content: "ℹ️";
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: rgba(0,0,0,0.7);
+        padding: 5px;
+        border-radius: 50%;
+        font-size: 12px;
+      }
+    }
+
+    /* Для очень маленьких экранов */
+    @media (max-width: 480px) {
+      #welcome-screen h1 {
+        font-size: 2rem;
+      }
+      
+      #welcome-screen p {
+        font-size: 1.1rem;
+      }
+      
+      .hero h1 {
+        font-size: 2rem;
+      }
+      
+      .hero h2 {
+        font-size: 1rem;
+      }
+      
       .section {
-grid-template-columns: 1fr;
-}
+        padding: 30px 15px !important;
+      }
+      
+      .modal-image {
+        height: 250px;
+      }
+    }
 
-
-.card img.active {
-transform: scale(1.2);
-}
-
-
-#welcome-screen h1 {
-font-size: 2rem;
-}
-
-
-#welcome-screen p {
-font-size: 1.2rem;
-}
-
-
-.hero h1 {
-font-size: 2.5rem;
-}
-
-
-.hero h2 {
-font-size: 1.2rem;
-}
+    /* Для планшетов (768px - 1024px) - оставляем 2 колонки */
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .section {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 60px 5%;
+      }
     }
   </style>
 </head>
 <body>
   <div id="welcome-screen">
-<h1>ПОЛИЦИЯ 2055</h1>
-<p>Нажмите, чтобы войти</p>
-</div>
+    <h1>ПОЛИЦИЯ 2055</h1>
+    <p>Нажмите, чтобы войти</p>
+  </div>
 
   <section class="hero">
     <div class="hero-title">
@@ -219,7 +383,8 @@ font-size: 1.2rem;
   </section>
 
   <section class="section">
-    <div class="card">
+    <!-- Карточка 1 -->
+    <div class="card" data-modal="modal1">
       <img src="https://i.postimg.cc/zDSjj2tH/SAMOKAT.gif" />
       <div class="card-text">
         <h2>Вжик</h2>
@@ -227,7 +392,8 @@ font-size: 1.2rem;
       </div>
     </div>
 
-    <div class="card">
+    <!-- Карточка 2 -->
+    <div class="card" data-modal="modal2">
       <img src="https://i.postimg.cc/h4brrZy7/PLANS.gif" />
       <div class="card-text">
         <h2>Подручный</h2>
@@ -235,7 +401,8 @@ font-size: 1.2rem;
       </div>
     </div>
 
-    <div class="card">
+    <!-- Карточка 3 -->
+    <div class="card" data-modal="modal3">
       <img src="https://i.postimg.cc/h4brrZyS/OC.gif" />
       <div class="card-text">
         <h2>Дозор-AR</h2>
@@ -243,7 +410,8 @@ font-size: 1.2rem;
       </div>
     </div>
 
-    <div class="card">
+    <!-- Карточка 4 -->
+    <div class="card" data-modal="modal4">
       <img src="https://i.postimg.cc/FFgZZCWd/EKZ.gif" />
       <div class="card-text">
         <h2>Титан</h2>
@@ -251,7 +419,8 @@ font-size: 1.2rem;
       </div>
     </div>
 
-    <div class="card">
+    <!-- Карточка 5 -->
+    <div class="card" data-modal="modal5">
       <img src="https://i.postimg.cc/2jQqMVZF/LEDAR.gif" />
       <div class="card-text">
         <h2>Лидар</h2>
@@ -259,14 +428,17 @@ font-size: 1.2rem;
       </div>
     </div>
 
-    <div class="card">
+    <!-- Карточка 6 -->
+    <div class="card" data-modal="modal6">
       <img src="https://i.postimg.cc/vT77PhWf/drony.jpg" />
       <div class="card-text">
         <h2>Смотрящие</h2>
         <p>патрулирование, поисковые мероприятия, тепловизоры, громкоговорители на массовых мероприятиях – всё это снижает нагрузку и повышает эффективность [Zala, Орлан]</p>
       </div>
     </div>
-    <div class="card">
+    
+    <!-- Карточка 7 -->
+    <div class="card" data-modal="modal7">
       <img src="https://i.postimg.cc/KY8CT96g/pdans2.jpg" />
       <div class="card-text">
         <h2>Планшет</h2>
@@ -274,7 +446,8 @@ font-size: 1.2rem;
       </div>
     </div>
 
-    <div class="card">
+    <!-- Карточка 8 -->
+    <div class="card" data-modal="modal8">
       <img src="https://i.postimg.cc/PqT5n4nX/det.jpg" />
       <div class="card-text">
         <h2>Дядя Стёпа</h2>
@@ -282,7 +455,8 @@ font-size: 1.2rem;
       </div>
     </div>
 
-    <div class="card">
+    <!-- Карточка 9 -->
+    <div class="card" data-modal="modal9">
       <img src="https://i.postimg.cc/tgkCqx9X/kamery.jpg" />
       <div class="card-text">
         <h2>Очи</h2>
@@ -290,64 +464,80 @@ font-size: 1.2rem;
       </div>
     </div>
 
-    <div class="card">
+    <!-- Карточка 10 -->
+    <div class="card" data-modal="modal10">
       <img src="https://i.postimg.cc/7h11B9gn/forma.jpg" />
       <div class="card-text">
         <h2>Форма</h2>
         <p>Современная полицейская форма с добавлением кевлара представляет собой усиленный комплект экипировки, предназначенный для защиты сотрудника от огнестрельного оружия и острых предметов. Основной материал формы — прочная ткань с добавлением кевларовых волокон в уязвимых зонах (грудь, спина, плечи), что обеспечивает устойчивость к разрывам и пробиванию. Форма сохраняет эргономику и подвижность, снабжена регулируемыми элементами для ношения тактического снаряжения и совместима с защитными жилетами и шлемами. Внешне она сохраняет привычный официальный вид, но сочетает практичность, безопасность и долговечность.</p>
       </div>
     </div>
-    <div class="card">
+    
+    <!-- Карточка 11 -->
+    <div class="card" data-modal="modal11">
       <img src="https://i.postimg.cc/7YjN9C84/rob.jpg" />
       <div class="card-text">
         <h2>Досмотрун</h2>
         <p>Робот для досмотра — автономное устройство для безопасного осмотра объектов и багажа. Оснащён камерами, тепловизором, датчиками металла и газов. Передаёт данные оператору в реальном времени, может перемещаться по ограниченным пространствам и взаимодействовать с объектами с помощью манипуляторов. Минимизирует риск для сотрудников, обеспечивая быстрый и точный контроль.</p>
       </div>
     </div>
-    <div class="card">
+    
+    <!-- Карточка 12 -->
+    <div class="card" data-modal="modal12">
       <img src="https://i.postimg.cc/TYBc0yM6/pes.jpg" />
       <div class="card-text">
         <h2>Мухтар</h2>
         <p>Патрульная робособака — автономное роботизированное устройство для патрулирования территорий и сопровождения нарядов. Оснащена камерами, датчиками движения, тепловизором и системой распознавания объектов. Может перемещаться по сложной городской среде, обходить препятствия и передавать данные в реальном времени. Используется для мониторинга, поиска подозрительных лиц и объектов, снижая риск для сотрудников.</p>
       </div>
     </div>
-    <div class="card">
+    
+    <!-- Карточка 13 -->
+    <div class="card" data-modal="modal13">
       <img src="https://i.postimg.cc/RV2Td35x/kletka.jpg" />
       <div class="card-text">
         <h2>Надзиратель</h2>
         <p>Разворачиваемая изолирующая клетка — мобильное средство временного удержания правонарушителя. В собраном положении размещается в служебном автомобиле, при активации автоматически разворачивается в устойчивую защитную конструкцию.</p>
       </div>
     </div>
-    <div class="card">
+    
+    <!-- Карточка 14 -->
+    <div class="card" data-modal="modal14">
       <img src="https://i.postimg.cc/m2KSjcfG/ul'trazvuk-puska.jpg" />
       <div class="card-text">
         <h2>Серенада</h2>
         <p>Инфразвуковое направленное средство воздействия — специальное нелетальное устройство для временного подавления агрессивных действий правонарушителей. Работает за счёт направленного инфразвукового излучения, вызывающего кратковременный дискомфорт, дезориентацию и снижение двигательной активности без нанесения стойкого вреда здоровью.</p>
       </div>
     </div>
-    <div class="card">
+    
+    <!-- Карточка 15 -->
+    <div class="card" data-modal="modal15">
       <img src="https://i.postimg.cc/gjWwS6qD/vzlom.jpg" />
       <div class="card-text">
         <h2>Отмычка</h2>
         <p>Электронное устройство вскрытия замков — специализированное техническое средство для оперативного и законного доступа в помещения при проведении служебных мероприятий. Устройство анализирует тип и состояние замка, подбирая оптимальный режим воздействия без механического разрушения конструкции.</p>
       </div>
     </div>
-    <div class="card">
-      <img src=" https://i.postimg.cc/x82kxbyp/casy.gif" />
+    
+    <!-- Карточка 16 -->
+    <div class="card" data-modal="modal16">
+      <img src="https://i.postimg.cc/x82kxbyp/casy.gif" />
       <div class="card-text">
         <h2>Страж-Net</h2>
         <p>Часы сканируют Wi-Fi, Bluetooth и другие сигналы, блокирует вредоносный код и отслеживает устройства вокруг. ИИ предупреждает о подозрительной активности и может "заморозить" гаджеты подозреваемых.</p>
       </div>
     </div>
     
-    <div class="card">
+    <!-- Карточка 17 -->
+    <div class="card" data-modal="modal17">
       <img src="https://i.postimg.cc/Y0H4nmf8/virt.jpg" />
       <div class="card-text">
         <h2>Павел</h2>
         <p>Виртуальный помощник сотрудника полиции — программное средство поддержки служебной деятельности в режиме реального времени. Обеспечивает оперативный поиск информации, подсказки по правовым нормам и алгоритмам действий, а также приём и обработку служебных запросов.Используется для ускорения принятия решений, снижения нагрузки на сотрудника и повышения точности выполнения служебных задач. Работает в пределах установленных регламентов и фиксирует обращения для служебного контроля.</p>
       </div>
     </div>
-    <div class="card">
+    
+    <!-- Карточка 18 -->
+    <div class="card" data-modal="modal18">
       <img src="https://i.postimg.cc/ZYHKtgTK/mas.jpg" />
       <div class="card-text">
         <h2>Патруль‑360</h2>
@@ -356,28 +546,296 @@ font-size: 1.2rem;
     </div>
   </section>
 
+  <!-- Модальные окна -->
+  <div class="modal" id="modal1">
+    <button class="close-modal">×</button>
+    <div class="modal-content">
+      <img src="https://i.postimg.cc/zDSjj2tH/SAMOKAT.gif" class="modal-image" />
+      <div class="modal-body">
+        <h2>Вжик</h2>
+        <p>Электросамокаты с биометрической активацией – быстрое перемещение в условиях плотной городской среды [ОЭЗ «Технополис Москва» Завод «Протон»].</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="modal2">
+    <button class="close-modal">×</button>
+    <div class="modal-content">
+      <img src="https://i.postimg.cc/h4brrZy7/PLANS.gif" class="modal-image" />
+      <div class="modal-body">
+        <h2>Подручный</h2>
+        <p>Портативный планшет с биометрическим входом – единый персональный информационно-коммуникационный комплекс (ПИКК), встроенный в униформу. Там – необходимые НПА, доступ к базе данных, возможность мгновенной фиксации информации [Аквариус, Yadro KVADRA_T].</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="modal3">
+    <button class="close-modal">×</button>
+    <div class="modal-content">
+      <img src="https://i.postimg.cc/h4brrZyS/OC.gif" class="modal-image" />
+      <div class="modal-body">
+        <h2>Дозор-AR</h2>
+        <p>Очки дополненной реальности – подсказки при проведении профилактических бесед и в целом при контакте с населением (анализ вербальных и невербальных признаков), визуальные материалы, алгоритмы работы  [Росэлектроника].</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="modal4">
+    <button class="close-modal">×</button>
+    <div class="modal-content">
+      <img src="https://i.postimg.cc/FFgZZCWd/EKZ.gif" class="modal-image" />
+      <div class="modal-body">
+        <h2>Титан</h2>
+        <p>Современные экзоскелеты позволяют патрульным перемещать тяжести и быстрее реагировать на ЧС.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="modal5">
+    <button class="close-modal">×</button>
+    <div class="modal-content">
+      <img src="https://i.postimg.cc/2jQqMVZF/LEDAR.gif" class="modal-image" />
+      <div class="modal-body">
+        <h2>Лидар</h2>
+        <p>быстрая фиксация обстановки – вместо традиционной фототаблицы [Geoskan 401 Лидар, лазерный сканер АГМ-МС Мультиспектральная камера Geoscan Pollux].</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="modal6">
+    <button class="close-modal">×</button>
+    <div class="modal-content">
+      <img src="https://i.postimg.cc/vT77PhWf/drony.jpg" class="modal-image" />
+      <div class="modal-body">
+        <h2>Смотрящие</h2>
+        <p>патрулирование, поисковые мероприятия, тепловизоры, громкоговорители на массовых мероприятиях – всё это снижает нагрузку и повышает эффективность [Zala, Орлан]</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="modal7">
+    <button class="close-modal">×</button>
+    <div class="modal-content">
+      <img src="https://i.postimg.cc/KY8CT96g/pdans2.jpg" class="modal-image" />
+      <div class="modal-body">
+        <h2>Планшет</h2>
+        <p>Технологичный планшет с AI-помощником позволяет не только молниеносно производить идентификацию лиц, но и является вспомогательным инструментом при проведении профилактической работы с населением, содержит в себе актуальные нормативные правовые акты и доступ к обширной базе данных.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="modal8">
+    <button class="close-modal">×</button>
+    <div class="modal-content">
+      <img src="https://i.postimg.cc/PqT5n4nX/det.jpg" class="modal-image" />
+      <div class="modal-body">
+        <h2>Дядя Стёпа</h2>
+        <p>Мы предлагаем развивать проекты, направленные на воспитание правовой культуры. Например, приложение для детей – с обучением, системой поощрений и бонусов, которые можно обменять на посещение музеев, выставок и других образовательных площадок.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="modal9">
+    <button class="close-modal">×</button>
+    <div class="modal-content">
+      <img src="https://i.postimg.cc/tgkCqx9X/kamery.jpg" class="modal-image" />
+      <div class="modal-body">
+        <h2>Очи</h2>
+        <p>Камеры, размещённые в общественных местах, оснащены ИИ для распознавания не только лиц, но и эмоционального состояния человека. Камера может автоматически сигнализировать о повышенном уровне стресса, агрессии или паники.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="modal10">
+    <button class="close-modal">×</button>
+    <div class="modal-content">
+      <img src="https://i.postimg.cc/7h11B9gn/forma.jpg" class="modal-image" />
+      <div class="modal-body">
+        <h2>Форма</h2>
+        <p>Современная полицейская форма с добавлением кевлара представляет собой усиленный комплект экипировки, предназначенный для защиты сотрудника от огнестрельного оружия и острых предметов. Основной материал формы — прочная ткань с добавлением кевларовых волокон в уязвимых зонах (грудь, спина, плечи), что обеспечивает устойчивость к разрывам и пробиванию. Форма сохраняет эргономику и подвижность, снабжена регулируемыми элементами для ношения тактического снаряжения и совместима с защитными жилетами и шлемами. Внешне она сохраняет привычный официальный вид, но сочетает практичность, безопасность и долговечность.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="modal11">
+    <button class="close-modal">×</button>
+    <div class="modal-content">
+      <img src="https://i.postimg.cc/7YjN9C84/rob.jpg" class="modal-image" />
+      <div class="modal-body">
+        <h2>Досмотрун</h2>
+        <p>Робот для досмотра — автономное устройство для безопасного осмотра объектов и багажа. Оснащён камерами, тепловизором, датчиками металла и газов. Передаёт данные оператору в реальном времени, может перемещаться по ограниченным пространствам и взаимодействовать с объектами с помощью манипуляторов. Минимизирует риск для сотрудников, обеспечивая быстрый и точный контроль.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="modal12">
+    <button class="close-modal">×</button>
+    <div class="modal-content">
+      <img src="https://i.postimg.cc/TYBc0yM6/pes.jpg" class="modal-image" />
+      <div class="modal-body">
+        <h2>Мухтар</h2>
+        <p>Патрульная робособака — автономное роботизированное устройство для патрулирования территорий и сопровождения нарядов. Оснащена камерами, датчиками движения, тепловизором и системой распознавания объектов. Может перемещаться по сложной городской среде, обходить препятствия и передавать данные в реальном времени. Используется для мониторинга, поиска подозрительных лиц и объектов, снижая риск для сотрудников.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="modal13">
+    <button class="close-modal">×</button>
+    <div class="modal-content">
+      <img src="https://i.postimg.cc/RV2Td35x/kletka.jpg" class="modal-image" />
+      <div class="modal-body">
+        <h2>Надзиратель</h2>
+        <p>Разворачиваемая изолирующая клетка — мобильное средство временного удержания правонарушителя. В собраном положении размещается в служебном автомобиле, при активации автоматически разворачивается в устойчивую защитную конструкцию.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="modal14">
+    <button class="close-modal">×</button>
+    <div class="modal-content">
+      <img src="https://i.postimg.cc/m2KSjcfG/ul'trazvuk-puska.jpg" class="modal-image" />
+      <div class="modal-body">
+        <h2>Серенада</h2>
+        <p>Инфразвуковое направленное средство воздействия — специальное нелетальное устройство для временного подавления агрессивных действий правонарушителей. Работает за счёт направленного инфразвукового излучения, вызывающего кратковременный дискомфорт, дезориентацию и снижение двигательной активности без нанесения стойкого вреда здоровью.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="modal15">
+    <button class="close-modal">×</button>
+    <div class="modal-content">
+      <img src="https://i.postimg.cc/gjWwS6qD/vzlom.jpg" class="modal-image" />
+      <div class="modal-body">
+        <h2>Отмычка</h2>
+        <p>Электронное устройство вскрытия замков — специализированное техническое средство для оперативного и законного доступа в помещения при проведении служебных мероприятий. Устройство анализирует тип и состояние замка, подбирая оптимальный режим воздействия без механического разрушения конструкции.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="modal16">
+    <button class="close-modal">×</button>
+    <div class="modal-content">
+      <img src="https://i.postimg.cc/x82kxbyp/casy.gif" class="modal-image" />
+      <div class="modal-body">
+        <h2>Страж-Net</h2>
+        <p>Часы сканируют Wi-Fi, Bluetooth и другие сигналы, блокирует вредоносный код и отслеживает устройства вокруг. ИИ предупреждает о подозрительной активности и может "заморозить" гаджеты подозреваемых.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="modal17">
+    <button class="close-modal">×</button>
+    <div class="modal-content">
+      <img src="https://i.postimg.cc/Y0H4nmf8/virt.jpg" class="modal-image" />
+      <div class="modal-body">
+        <h2>Павел</h2>
+        <p>Виртуальный помощник сотрудника полиции — программное средство поддержки служебной деятельности в режиме реального времени. Обеспечивает оперативный поиск информации, подсказки по правовым нормам и алгоритмам действий, а также приём и обработку служебных запросов.Используется для ускорения принятия решений, снижения нагрузки на сотрудника и повышения точности выполнения служебных задач. Работает в пределах установленных регламентов и фиксирует обращения для служебного контроля.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="modal18">
+    <button class="close-modal">×</button>
+    <div class="modal-content">
+      <img src="https://i.postimg.cc/ZYHKtgTK/mas.jpg" class="modal-image" />
+      <div class="modal-body">
+        <h2>Патруль‑360</h2>
+        <p>Современный служебный автомобиль для круглосуточного патрулирования городской среды. Оснащён панорамной камерой кругового обзора, установленной на крыше, обеспечивающей непрерывный контроль обстановки на 360 градусов. Система фиксирует дорожную и пешеходную активность, автоматически выявляет подозрительные действия и передаёт данные в дежурные подразделения.</p>
+      </div>
+    </div>
+  </div>
+
   <footer>
     © 2025 | Vектор БеZопасности
   </footer>
 
   <script>
+    // Welcome screen
     const welcome = document.getElementById('welcome-screen');
-welcome.addEventListener('click', () => {
-welcome.classList.add('fade-out');
-setTimeout(() => welcome.style.display = 'none', 1000);
-});
+    welcome.addEventListener('click', () => {
+      welcome.classList.add('fade-out');
+      setTimeout(() => welcome.style.display = 'none', 1000);
+    });
+
+    // ПК версия: увеличение картинки на месте (работает только на ПК)
     const cards = document.querySelectorAll('.card');
     cards.forEach(card => {
       const img = card.querySelector('img');
       const text = card.querySelector('.card-text');
+      
       img.addEventListener('click', () => {
-        document.querySelectorAll('img').forEach(i => i.classList.remove('active'));
-        document.querySelectorAll('.card-text').forEach(t => t.classList.remove('active'));
-        img.classList.add('active');
-        text.classList.add('active');
+        // Проверяем ширину экрана - на мобильных используем модальное окно
+        if (window.innerWidth <= 768) {
+          const modalId = card.getAttribute('data-modal');
+          const modal = document.getElementById(modalId);
+          if (modal) {
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+          }
+        } else {
+          // На ПК - оригинальное поведение
+          document.querySelectorAll('img').forEach(i => i.classList.remove('active'));
+          document.querySelectorAll('.card-text').forEach(t => t.classList.remove('active'));
+          img.classList.add('active');
+          text.classList.add('active');
+        }
       });
     });
-  </script>
 
+    // Закрытие модальных окон
+    document.querySelectorAll('.close-modal').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.modal').forEach(modal => {
+          modal.classList.remove('active');
+        });
+        document.body.style.overflow = 'auto';
+      });
+    });
+
+    // Закрытие модального окна по клику на фон
+    document.querySelectorAll('.modal').forEach(modal => {
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.classList.remove('active');
+          document.body.style.overflow = 'auto';
+        }
+      });
+    });
+
+    // Закрытие модального окна по Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.modal').forEach(modal => {
+          modal.classList.remove('active');
+        });
+        document.querySelectorAll('img').forEach(img => {
+          img.classList.remove('active');
+        });
+        document.querySelectorAll('.card-text').forEach(text => {
+          text.classList.remove('active');
+        });
+        document.body.style.overflow = 'auto';
+      }
+    });
+
+    // При изменении размера окна - сбрасываем активные элементы
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 768) {
+        // На ПК - сбрасываем модальные окна
+        document.querySelectorAll('.modal').forEach(modal => {
+          modal.classList.remove('active');
+        });
+        document.body.style.overflow = 'auto';
+      } else {
+        // На мобильных - сбрасываем увеличенные картинки
+        document.querySelectorAll('img').forEach(img => {
+          img.classList.remove('active');
+        });
+        document.querySelectorAll('.card-text').forEach(text => {
+          text.classList.remove('active');
+        });
+      }
+    });
+  </script>
 </body>
 </html>
